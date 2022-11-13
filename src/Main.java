@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Main implements ActionListener{
@@ -83,17 +84,8 @@ public class Main implements ActionListener{
 	            if (result == JFileChooser.APPROVE_OPTION) {
 	                
 	                    File file = fileChooser.getSelectedFile();
-	                    //JOptionPane.showMessageDialog(null, "Success");
-	                    try {
-							display();
-						} catch (IOException e5) {
-							// TODO Auto-generated catch block
-							e5.printStackTrace();
-						}
-	          //write code here for compress
 	                    
-	    
-						try {
+	                   try {
 							orginal = ImageIO.read(file);
 						} catch (IOException e2) {
 							// TODO Auto-generated catch block
@@ -146,6 +138,8 @@ public class Main implements ActionListener{
 	    			// Save
 	    			try {
 						ImageIO.write(combined, "PNG", new File("framed"));
+						display();
+						
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -163,11 +157,11 @@ public class Main implements ActionListener{
 					
 			        File file = new File("framed");
 			        BufferedImage bufferedImage = ImageIO.read(file);
-					
+			        String path=file.getAbsolutePath();
 					   ImageIcon imageIcon = new ImageIcon(bufferedImage);
 				        JFrame DisplyFrame = new JFrame("Preview");
 				      
-				        DisplyFrame.setResizable(false);
+				       // DisplyFrame.setResizable(false);
 				 
 				        DisplyFrame.setLayout(new FlowLayout());
 				        
@@ -180,7 +174,7 @@ public class Main implements ActionListener{
 
 				        DisplyFrame.add(jLabel);
 				        
-				        JLabel Location=new JLabel("Location");
+				        JLabel Location=new JLabel("Image Saved To: "+path);
 				        Location.setLayout(null);
 				        Location.setBounds(100,600,100,100);
 				        

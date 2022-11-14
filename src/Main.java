@@ -1,6 +1,8 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -16,7 +18,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.LabelView;
 
 public class Main implements ActionListener{
 	JFrame jf;
@@ -27,24 +32,37 @@ public class Main implements ActionListener{
 	BufferedImage orginal;
 	int width=500,height=500;
 	String formant="jpg";
+	JLabel Imagelb;
 	
 	public Main () {
 		jf=new JFrame("Frame Creator");
-		jf.setLayout(null);
+		
 		jf.setResizable(false);
-		jf.setBounds(600,200,600,500);
+		
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.getContentPane().setBackground(new Color(57, 62, 70));
+		jf.getContentPane().setBackground(new Color(17,17,17,255));
+		
+		
+		Imagelb=new JLabel(new ImageIcon("/home/azharkoivila/eclipse-workspace/FrameCreator/resource/banner.gif"));
+		
+		jf.getContentPane().add(Imagelb);
+		
+		jf.pack();
+		jf.setBounds(600,200,600,600);
+		
+		jf.setLayout(null);
+		
 		
 		label=new JLabel("This is a Simple  app to Support Blood Donators");
-		label.setBounds(200,10,200,50);	
-		label.setForeground(Color.green);
+		label.setFont(new Font("Serif", Font.PLAIN, 20));
+		label.setBounds(65,300,500,50);	
+		label.setForeground(Color.WHITE);
 		label.setVisible(true);
 		jf.add(label);
 		
 		buttonchoose=new JButton("Choose Image");
-		buttonchoose.setBounds(190,400,200,50);
-		buttonchoose.setBackground(new Color(0, 173, 181));
+		buttonchoose.setBounds(190,450,200,50);
+		buttonchoose.setBackground(new Color(250,104,0,255));
 		buttonchoose.setForeground(Color.white);
 		buttonchoose.setVisible(true);
 		buttonchoose.addActionListener(this);
@@ -155,38 +173,51 @@ public class Main implements ActionListener{
 
 				void display() throws IOException {
 					
-			        File file = new File("framed");
-			        BufferedImage bufferedImage = ImageIO.read(file);
-			        String path=file.getAbsolutePath();
-					   ImageIcon imageIcon = new ImageIcon(bufferedImage);
-				        JFrame DisplyFrame = new JFrame("Preview");
-				      
-				       // DisplyFrame.setResizable(false);
-				 
-				        DisplyFrame.setLayout(new FlowLayout());
-				        
-				        DisplyFrame.setBounds(200,200,550,600);
-				        
-				        JLabel jLabel = new JLabel();
+				     File file = new File("framed");
+				        BufferedImage bufferedImage = ImageIO.read(file);
+				        String path=file.getAbsolutePath();
+						   ImageIcon imageIcon = new ImageIcon(bufferedImage);
+					        JFrame DisplyFrame = new JFrame("Preview");
+					        
+					        DisplyFrame.getContentPane().setBackground(new Color(17,17,17,255));
+					        DisplyFrame.setResizable(false);
+					       
+					        
+					       
+					        JLabel jLabel = new JLabel();
+					        jLabel.setIcon(imageIcon);
+					        
+					        DisplyFrame.getContentPane().add(jLabel);
+					        
+					        DisplyFrame.pack();
+					        DisplyFrame.setBounds(200,200,500,650);
+					        
+					        DisplyFrame.setLayout(null);
+					        
+					        
+					        
+					        JLabel Location=new JLabel("Image Saved To:- ");
+					        Location.setLayout(null);
+					        Location.setBounds(250,500,600,100);
+					        Location.setFont(new Font("Serif", Font.BOLD, 13));
+					        Location.setForeground(Color.white);
+					        
+					        Location.setVisible(true);
+					        DisplyFrame.add(Location);
+					        
+					        JLabel Location1=new JLabel(""+path);
+					       
+					        Location1.setLayout(null);
+					        Location1.setBounds(0, 520, 600, 100);
+					        Location1.setFont(new Font("Serif", Font.BOLD, 13));
+					        Location1.setForeground(Color.white);
+					        DisplyFrame.add(Location1);
+					       
+					        
+					        
+					        DisplyFrame.setVisible(true);
 
-				 
-				        jLabel.setIcon(imageIcon);
-
-				        DisplyFrame.add(jLabel);
-				        
-				        JLabel Location=new JLabel("Image Saved To: "+path);
-				        Location.setLayout(null);
-				        Location.setBounds(100,600,100,100);
-				        
-				        Location.setVisible(true);
-				        
-				        DisplyFrame.add(Location);
-				        
-				        
-				        DisplyFrame.setVisible(true);
-
-	
-	
+		
 					}
 
 

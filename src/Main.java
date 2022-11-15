@@ -1,7 +1,5 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,18 +8,16 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.LabelView;
+
 
 public class Main implements ActionListener{
 	JFrame jf;
@@ -43,7 +39,7 @@ public class Main implements ActionListener{
 		jf.getContentPane().setBackground(new Color(17,17,17,255));
 		
 		
-		Imagelb=new JLabel(new ImageIcon("/home/azharkoivila/eclipse-workspace/FrameCreator/resource/banner.gif"));
+		Imagelb=new JLabel(new ImageIcon(getClass().getClassLoader().getResource("banner.gif")));
 		
 		jf.getContentPane().add(Imagelb);
 		
@@ -134,7 +130,7 @@ public class Main implements ActionListener{
 				
 				
 						try {
-							overlay = ImageIO.read(new File("/home/azharkoivila/Desktop/azhar/azhar.png"));
+							overlay = ImageIO.read((getClass().getClassLoader().getResource("overlay.png")));
 						} catch (IOException e2) {
 							// TODO Auto-generated catch block
 							e2.printStackTrace();
@@ -155,7 +151,7 @@ public class Main implements ActionListener{
 
 	    			// Save
 	    			try {
-						ImageIO.write(combined, "PNG", new File("framed"));
+						ImageIO.write(combined, "PNG", new File("framed.jpg"));
 						display();
 						
 					} catch (IOException e1) {
@@ -172,15 +168,15 @@ public class Main implements ActionListener{
 
 
 				void display() throws IOException {
-					
-				     File file = new File("framed");
+						deleteCompressed();
+						File file = new File("framed.jpg");
 				        BufferedImage bufferedImage = ImageIO.read(file);
 				        String path=file.getAbsolutePath();
-						   ImageIcon imageIcon = new ImageIcon(bufferedImage);
-					        JFrame DisplyFrame = new JFrame("Preview");
+						ImageIcon imageIcon = new ImageIcon(bufferedImage);
+					    JFrame DisplyFrame = new JFrame("Preview");
 					        
-					        DisplyFrame.getContentPane().setBackground(new Color(17,17,17,255));
-					        DisplyFrame.setResizable(false);
+					    DisplyFrame.getContentPane().setBackground(new Color(17,17,17,255));
+					    DisplyFrame.setResizable(false);
 					       
 					        
 					       
@@ -226,6 +222,13 @@ public class Main implements ActionListener{
 	private Component getParent() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	void deleteCompressed() throws IOException {
+		Files.deleteIfExists(
+                Paths.get("compressed.jpg"));
+		
 	}
 		 
 		 

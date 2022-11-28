@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
@@ -26,7 +27,7 @@ public class Main implements ActionListener{
 	BufferedImage overlay;
 	BufferedImage image1;
 	BufferedImage orginal;
-	int width=500,height=500;
+	int width=1000,height=1000;
 	String formant="jpg";
 	JLabel Imagelb;
 	
@@ -99,11 +100,13 @@ public class Main implements ActionListener{
 	                
 	                    File file = fileChooser.getSelectedFile();
 	                    
+	                    
 	                   try {
 							orginal = ImageIO.read(file);
 						} catch (IOException e2) {
 							// TODO Auto-generated catch block
 							e2.printStackTrace();
+							JOptionPane.showMessageDialog(null, "ERROR");
 						}
 	                    File compressed=new File("compressed.jpg");
 	                    BufferedImage resized=new BufferedImage(width, height, orginal.getType());
@@ -130,7 +133,7 @@ public class Main implements ActionListener{
 				
 				
 						try {
-							overlay = ImageIO.read((getClass().getClassLoader().getResource("overlay.png")));
+							overlay = ImageIO.read((getClass().getClassLoader().getResource("frame.png")));
 						} catch (IOException e2) {
 							// TODO Auto-generated catch block
 							e2.printStackTrace();
@@ -145,7 +148,7 @@ public class Main implements ActionListener{
 	    			// paint both images, preserving the alpha channels
 	    			Graphics g = combined.getGraphics();
 	    			g.drawImage(image1, 0, 0, null);
-	    			g.drawImage(overlay, 250, 0, null);
+	    			g.drawImage(overlay, 0, 0, null);
 
 	    			g.dispose();
 
@@ -176,7 +179,7 @@ public class Main implements ActionListener{
 					    JFrame DisplyFrame = new JFrame("Preview");
 					        
 					    DisplyFrame.getContentPane().setBackground(new Color(17,17,17,255));
-					    DisplyFrame.setResizable(false);
+					    //DisplyFrame.setResizable(false);
 					       
 					        
 					       
@@ -186,32 +189,37 @@ public class Main implements ActionListener{
 					        DisplyFrame.getContentPane().add(jLabel);
 					        
 					        DisplyFrame.pack();
-					        DisplyFrame.setBounds(200,200,500,650);
+					        DisplyFrame.setBounds(200,200,1000,1050);
 					        
 					        DisplyFrame.setLayout(null);
 					        
 					        
-					        
-					        JLabel Location=new JLabel("Image Saved To:- ");
-					        Location.setLayout(null);
-					        Location.setBounds(250,500,600,100);
-					        Location.setFont(new Font("Serif", Font.BOLD, 13));
-					        Location.setForeground(Color.white);
-					        
-					        Location.setVisible(true);
-					        DisplyFrame.add(Location);
-					        
-					        JLabel Location1=new JLabel(""+path);
-					       
-					        Location1.setLayout(null);
-					        Location1.setBounds(0, 520, 600, 100);
-					        Location1.setFont(new Font("Serif", Font.BOLD, 13));
-					        Location1.setForeground(Color.white);
-					        DisplyFrame.add(Location1);
-					       
-					        
+					             
 					        
 					        DisplyFrame.setVisible(true);
+					        
+					        
+					        
+					        
+					        
+					        
+					        JFrame pathjf=new JFrame();
+					        pathjf.setResizable(false);
+							
+							pathjf.setBounds(100,100,700,100);
+							
+							pathjf.getContentPane().setBackground(new Color(17,17,17,255));
+							
+							
+							JLabel pathlb=new JLabel("Image Saved To:- "+path);
+							pathlb.setBounds(10,0,700,100);
+							pathlb.setForeground(Color.white);
+							pathlb.setVisible(true);
+							
+							pathjf.setLayout(null);
+							pathjf.add(pathlb);
+							pathjf.setVisible(true);
+							
 
 		
 					}
@@ -230,6 +238,8 @@ public class Main implements ActionListener{
                 Paths.get("compressed.jpg"));
 		
 	}
+	
+	
 		 
 		 
 }

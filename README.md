@@ -5,8 +5,7 @@ This Java Swing Software To help to Create Photo Frame To Support Blood Donators
 
 ## Screenshots
 
-![App Screenshot](https://raw.githubusercontent.com/Azharkoivila/PhotoFrameCreator/readme/ScreenShots/ScreenShot.png) 
-![App Screenshot]()
+![App Screenshot](https://raw.githubusercontent.com/Azharkoivila/PhotoFrameCreator/readme/ScreenShots/ScreenShot.png)
 ## Usage
 
 1. Launch Eclipse Java.
